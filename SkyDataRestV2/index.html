@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Request App</title>
+</head>
+<body>
+
+    <div>
+        <h2>Request</h2>
+        <ul id="products" />
+    </div>
+
+
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+    <script>
+        var data = "{'code':0,'vid': 324,'license_plane': 'AJK 299','lon':-0.54562,'lat':0.67338,'valid_position':true,'event_time':'2016-09-08T17:42:14+0', 'kmph':16, 'placeneme':'', 'client_id':0, 'head':359, 'sys_odometer':100000.1, 'sys_hourmeter':1.1}";
+
+        $(document).ready(function () {
+            // Send an AJAX request
+            addData(data);
+        });
+
+        function addData(data) {// pass your data in method
+            $.ajax({
+                type: "POST",
+                //url: "http://168.226.219.190:8080/api/v2/values",
+                url: "http://190.106.69.86:50080/api/v2/values",
+                //url: "http://localhost:1125/api/v2/values",
+                data: JSON.stringify(data),// now data come in this function
+                contentType: "application/json; charset=utf-8",
+                crossDomain: true,
+                dataType: "json"
+            }).done(function (result) {
+                alert('Request done!');
+                console.log(result);
+            }).fail(function (result) {
+                alert('failed');
+                console.log(result);
+            });
+        }
+
+
+    </script>
+</body>
+</html>

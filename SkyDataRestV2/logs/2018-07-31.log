@@ -1,0 +1,5 @@
+2018-07-31 22:36:23.9168 INFO Datos recibidos -> {JsonConvert.SerializeObject(item)}
+2018-07-31 22:36:23.9896 ERROR Error
+2018-07-31 22:36:23.9916 INFO Resultado -> No se ha inicializado la propiedad ConnectionString.
+2018-07-31 22:38:41.5378 INFO Datos recibidos -> {JsonConvert.SerializeObject(item)}
+2018-07-31 22:38:43.1601 INFO Resultado -> Se inserto el registro correactamente: JRZ870
