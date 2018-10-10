@@ -29,11 +29,19 @@ namespace SkyDataRestV2.Controllers
         [HttpPost]
         public IHttpActionResult Post([FromBody]string value)
         {
-            Request item = Newtonsoft.Json.JsonConvert.DeserializeObject<Request>(value);
-            logger.Info("Datos recibidos -> { JsonConvert.SerializeObject(item) " + value.ToString());
-            logger.Info("Resultado -> " + InsertValues(item));
-            return Ok("Salio OK");
-
+            try
+            {
+                logger.Info("Datos recibidos -> Post([FromBody]string value) " + value.ToString());
+                Request item = Newtonsoft.Json.JsonConvert.DeserializeObject<Request>(value);
+                logger.Info("Serialize Datos recibidos -> { JsonConvert.SerializeObject(item) " + value.ToString());
+                logger.Info("Resultado -> " + InsertValues(item));
+                return Ok("Salio OK");
+            }
+            catch (Exception ex)
+            {
+                logger.Info("Error -> " + ex.Message);
+                throw;
+            }
         }
 
         private static string InsertValues(Request request)
@@ -51,8 +59,6 @@ namespace SkyDataRestV2.Controllers
                 string longitud;
                 string latitud;
 
-
-
                 connetionString = ConfigurationManager.AppSettings["cnn"];
                 connection = new SqlConnection(connetionString);
 
@@ -65,8 +71,6 @@ namespace SkyDataRestV2.Controllers
                 param.Direction = ParameterDirection.Input;
                 param.DbType = DbType.String;
                 command.Parameters.Add(param);
-
-
 
                 if (!request.lon.ToString().Contains(InitSepDecimal()))
                 {
